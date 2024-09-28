@@ -7,7 +7,7 @@ import CardWidget from './CardWidget'
 function NavBar () {
   return (
     <Navbar expand="lg" bg="dark" data-bs-theme="dark">
-    <Container>
+    <Container fluid>
       <Navbar.Brand href="#home">
         <img src={logo} width="200" height="30" className="d-inline-block align-top" alt="logo pelucars" />
       </Navbar.Brand>
