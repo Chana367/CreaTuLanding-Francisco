@@ -14,15 +14,22 @@ function ItemCount ({ stock, initial, onAdd}) {
     }
   } 
 
-
-
   return (
-    <div>
-      <button onClick={handleDecrement}>-</button>
-      <span>{count}</span>
-      <button onClick={handleIncrement}>+</button>
+    <div className="d-flex flex-column align-items-center">
+      <div className="d-flex align-items-center mb-3">
+        <button className="btn btn-outline-primary" onClick={handleDecrement}>
+          -
+        </button>
+        <span className="mx-3">{count}</span>
+        <button className="btn btn-outline-primary" onClick={handleIncrement}>
+          +
+        </button>
+      </div>
       <div>
-        <button onClick={() => onAdd(count)} disabled={!stock}>
+        <button 
+          className="btn btn-success" 
+          onClick={() => onAdd(count)} 
+          disabled={!stock}>
           Agregar al carrito
         </button>
       </div>

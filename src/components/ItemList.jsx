@@ -4,7 +4,6 @@ import Item from "./Item"
 const ItemList = ({ products }) => {
   return (
     <Container>
-
       <Row>
         {products.map(prod =>(
           <Col key={prod.id}>
