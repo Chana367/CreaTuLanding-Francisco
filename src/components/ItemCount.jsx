@@ -1,8 +1,8 @@
 import { useState } from "react";
-
-function ItemCount ({ stock, initial, onAdd}) {
+import { useCart } from "../context/cartContext";
+function ItemCount ({ stock, initial, detail}) {
   const [count, setCount] = useState(initial)
-
+  const { addToCart, isInCart } = useCart();
   const handleIncrement = () => {
     if (count < stock){
       setCount(count + 1)
@@ -13,6 +13,10 @@ function ItemCount ({ stock, initial, onAdd}) {
       setCount(count - 1)
     }
   } 
+
+  //add cart
+  const handleAddToCart = () => addToCart({...detail, quantity: count})
+
 
   return (
     <div className="d-flex flex-column align-items-center">
@@ -28,7 +32,7 @@ function ItemCount ({ stock, initial, onAdd}) {
       <div>
         <button 
           className="btn btn-success" 
-          onClick={() => onAdd(count)} 
+          onClick={handleAddToCart} 
           disabled={!stock}>
           Agregar al carrito
         </button>

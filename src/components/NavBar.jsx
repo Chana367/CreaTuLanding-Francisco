@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/logo.png'
-import CardWidget from './CardWidget'
+import CartWidget from './CartWidget'
 import { Link } from 'react-router-dom';
 
 function NavBar () {
@@ -19,8 +19,8 @@ function NavBar () {
           <Nav.Link as={Link} to='/category/motos'>Motos</Nav.Link>
           <Nav.Link as={Link} to='/category/camionetas'>Camionetas</Nav.Link>
           <Nav.Link as={Link} to='/category/utilitarios'>Utilitarios</Nav.Link>
-          {/* CardWidget */}
-          <CardWidget cant='0' color='white' />
+          {/* CartWidget */}
+          <CartWidget color='white' />
         </Nav>
       </Navbar.Collapse>
     </Container>

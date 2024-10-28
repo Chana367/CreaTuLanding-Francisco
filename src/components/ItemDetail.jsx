@@ -16,7 +16,7 @@ const ItemDetail = (props) => {
                   </div>
                   <p className="lead">{props.descripcion}</p>
                   <div className="d-flex">
-                    <ItemCount stock={props.stock} initial={1} onAdd={(cant) => console.log("Cantidad Agregada: ", cant)}/>
+                    <ItemCount stock={props.stock} initial={1} detail={props}/>
                   </div>
               </div>
           </div>
