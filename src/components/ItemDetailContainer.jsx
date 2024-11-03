@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { getProductById } from "../../asyncMock"
+import { getProductById } from "../firebase/db"
 import ItemDetail from "./ItemDetail"
 import { useParams } from "react-router-dom"
+
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null)
   const { id } = useParams()

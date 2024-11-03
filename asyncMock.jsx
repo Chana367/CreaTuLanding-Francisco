@@ -102,30 +102,3 @@ const products = [
 
 
 
-export const getProducts = () =>{
-  return new Promise((resolve, reject) =>{
-    resolve(products)
-  })
-}
-
-export const getProductById = (productId) => {
-  return  new Promise((resolve, reject) =>{
-    const product = products.find(product => product.id === parseInt(productId))
-    if(product){
-      resolve(product)
-    } else {
-      reject(new Error('Producto no encontrado'))
-    }
-  })
-}
-
-export const getProductsByCategName = (categName) => {
-  return  new Promise((resolve, reject) =>{
-    if(!categName){
-      reject(new Error('Debe proporcionar un nombre de categoría'))
-    }else{
-      const product = products.filter(product => product.category === categName)
-      resolve(product)
-    }
-  })
-}

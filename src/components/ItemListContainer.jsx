@@ -1,7 +1,7 @@
-import { useEffect, useState, useContext } from "react"
-import { getProducts, getProductsByCategName } from "../../asyncMock"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ItemList from "./ItemList"
+import { getProducts, getProductsByCategName } from "../firebase/db"
 
 function ItemListContainer () {
   const [products, setProducts] = useState([])
@@ -12,6 +12,7 @@ function ItemListContainer () {
     const consulta = categoryName ? getProductsByCategName(categoryName) : getProducts()
     consulta
       .then(response=> {
+        console.log("Response: " + response)
         setProducts(response)
       })
       .catch(error=> {
