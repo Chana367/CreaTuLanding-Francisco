@@ -24,6 +24,7 @@ El proyecto utiliza varias dependencias para su funcionamiento y diseño. A cont
 - **react-bootstrap**: Integra componentes de Bootstrap en React para crear interfaces de usuario estilizadas y responsivas sin necesidad de añadir clases manualmente.
 - **react-dom**: Proporciona métodos específicos de DOM que sirven como punto de entrada en aplicaciones basadas en la web.
 - **react-router-dom**: Librería para el enrutamiento de la aplicación. Facilita la navegación entre diferentes vistas o páginas dentro del eCommerce (inicio, carrito, checkout, etc.).
+- **react-loading-indicators**: Proporciona una serie de indicadores de carga visualmente atractivos para mejorar la experiencia del usuario en momentos de espera, como al cargar productos o durante el proceso de checkout. Facilita la implementación de loaders personalizados en componentes de React.
 
 ## Instalación y ejecución 🚀
 
