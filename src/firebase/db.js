@@ -6,14 +6,17 @@ import {
   getDocs,
   doc,
   getDoc,
-  addDoc
+  addDoc,
+  documentId,
+  writeBatch,
 } from "firebase/firestore";
 import { app } from "./config";
 
 const db = getFirestore(app);
+const productsRef = collection(db, "products");
 
 export const getProducts = async () => {
-  const querySnapshot = await getDocs(collection(db, "products"));
+  const querySnapshot = await getDocs(productsRef);
   const products = [];
 
   querySnapshot.forEach((doc) => {
@@ -32,10 +35,7 @@ export const getProductById = async (productId) => {
 
 export const getProductsByCategName = async (categName) => {
   const products = [];
-  const q = query(
-    collection(db, "products"),
-    where("category", "==", categName)
-  );
+  const q = query(productsRef, where("category", "==", categName));
 
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
@@ -47,9 +47,47 @@ export const getProductsByCategName = async (categName) => {
 
 export const createOrder = async (order) => {
   try {
-    const docRef = await addDoc(collection(db, "orders"), order);
-    console.log("Document written with ID: ", docRef.id);
+    const batch = writeBatch(db);
+    const outOfStock = await updateStock(order, batch);
+
+    if (outOfStock.length === 0) {
+      await batch.commit();
+
+      //create order
+      const orderAdded = await addDoc(collection(db, "orders"), order);
+      console.log("Order added withID: ", orderAdded.id);
+      return orderAdded.id;
+    } else {
+      console.error("Hay productos fuera de stock");
+      return null;
+    }
   } catch (e) {
     console.error("Error adding document: ", e);
+    throw e;
   }
+};
+
+const updateStock = async (order, batch) => {
+  const cart = order.items;
+  const outOfStock = [];
+  const ids = cart.map((item) => item.id);
+  const productsAddedFromFirestore = await getDocs(
+    query(productsRef, where(documentId(), "in", ids))
+  );
+  const { docs } = productsAddedFromFirestore;
+
+  // update stock
+  docs.forEach((doc) => {
+    const dataDoc = doc.data();
+    const stockDb = dataDoc.stock;
+
+    const productAddedToCart = cart.find((prod) => prod.id === doc.id);
+    const prodQuantity = productAddedToCart?.quantity;
+    if (stockDb >= prodQuantity) {
+      batch.update(doc.ref, { stock: stockDb - prodQuantity });
+    } else {
+      outOfStock.push({ id: doc.id, ...dataDoc });
+    }
+  });
+  return outOfStock;
 };

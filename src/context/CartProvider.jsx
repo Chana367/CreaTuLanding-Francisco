@@ -2,8 +2,6 @@ import { useState } from "react";
 import { CartContext } from "./cartContext";
 
 function CartProvider({ children }) {
-  // TODO: Armar checkout
-  //TODO: ARMAR MARKDOWN
   const [cart, setCart] = useState([]);
 
   // add product in cart

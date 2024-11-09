@@ -25,7 +25,7 @@ function Cart() {
       <h3 className="d-flex justify-content-center mt-3">Total: ${getTotal()}</h3>
       <div className="d-flex justify-content-around mt-3">
         <Button className="btn btn-primary" onClick={() => clearCart()}>Limpiar Carrito</Button>
-        <Button className="btn btn-success" as={Link} to='/checkout'>Comprar</Button>
+        <Button className="btn btn-success" as={Link} to='/checkout'>Checkout</Button>
       </div>
     </div>
   );
