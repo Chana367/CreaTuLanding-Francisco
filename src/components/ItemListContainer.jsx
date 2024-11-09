@@ -12,7 +12,6 @@ function ItemListContainer () {
     const consulta = categoryName ? getProductsByCategName(categoryName) : getProducts()
     consulta
       .then(response=> {
-        console.log("Response: " + response)
         setProducts(response)
       })
       .catch(error=> {
